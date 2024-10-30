@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html{
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1{
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 55vh;
+        }
+        button{
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            background-color: red;
+            border: 25px solid white;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text"></h1>
+        <button></button>
+    <script>
+        const text = document.querySelector('.text');
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        const startButton = document.querySelector('button');
+        recognition.lang = 'en-US';
+        startButton.addEventListener('click', () => {
+            recognition.start();
+            recognition.onresult = function(event){
+                text.textContent = event.results[0][0].transcript;
+            };
+        });
+    </script>
+</body>
+</html>
